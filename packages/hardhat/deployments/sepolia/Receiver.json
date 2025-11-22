@@ -1,0 +1,180 @@
+{
+  "address": "0xd0D812E41729F0c9f9B2E6fb8267604F4152e17D",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_wormholeRelayer",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_treasury",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_authorizedEmitter",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "sourceChain",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "sourceAddress",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ProposalReceived",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "SOURCE_CHAIN_ID",
+      "outputs": [
+        {
+          "internalType": "uint16",
+          "name": "",
+          "type": "uint16"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "authorizedEmitter",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "payload",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes[]",
+          "name": "",
+          "type": "bytes[]"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "sourceAddress",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint16",
+          "name": "sourceChain",
+          "type": "uint16"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "receiveWormholeMessages",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "treasury",
+      "outputs": [
+        {
+          "internalType": "contract ITreasury",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "wormholeRelayer",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xb036fc9a3ee08f42eb587884adbe5d19612abadc9395fbe68bfcde32f8b332e4",
+  "receipt": {
+    "to": null,
+    "from": "0x03Be4608d1d183F577593b8fc070c6D00632c331",
+    "contractAddress": "0xd0D812E41729F0c9f9B2E6fb8267604F4152e17D",
+    "transactionIndex": 23,
+    "gasUsed": "420614",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x248080afa14c44873e1433e0fcd6e8dde55e2a7810acba536aa6f0163e2a491d",
+    "transactionHash": "0xb036fc9a3ee08f42eb587884adbe5d19612abadc9395fbe68bfcde32f8b332e4",
+    "logs": [],
+    "blockNumber": 9676680,
+    "cumulativeGasUsed": "3191215",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x7b1bd7a6b4e61c2a123f6cb2dc53182f64f543fd",
+    "0xB13f25f0E2BA5e36089af6fD7c17AF83A68FC45A",
+    "0x00000000000000000000000082a1c924fbbc6c09b5431d99931b423ad1a43384"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "cac78b7775d246c268076e1056571e29",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_wormholeRelayer\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_treasury\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_authorizedEmitter\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"sourceChain\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"sourceAddress\",\"type\":\"bytes32\"}],\"name\":\"ProposalReceived\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"SOURCE_CHAIN_ID\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"authorizedEmitter\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"payload\",\"type\":\"bytes\"},{\"internalType\":\"bytes[]\",\"name\":\"\",\"type\":\"bytes[]\"},{\"internalType\":\"bytes32\",\"name\":\"sourceAddress\",\"type\":\"bytes32\"},{\"internalType\":\"uint16\",\"name\":\"sourceChain\",\"type\":\"uint16\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"receiveWormholeMessages\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"treasury\",\"outputs\":[{\"internalType\":\"contract ITreasury\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"wormholeRelayer\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"receiveWormholeMessages(bytes,bytes[],bytes32,uint16,bytes32)\":{\"details\":\"Perform strict security checks before executing the payload.\"}},\"title\":\"Receiver\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"receiveWormholeMessages(bytes,bytes[],bytes32,uint16,bytes32)\":{\"notice\":\"The entry point called by the Wormhole Relayer.\"}},\"notice\":\"Receives verified messages from Base Sepolia and triggers the Treasury.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Receiver.sol\":\"Receiver\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Receiver.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\nimport \\\"./interfaces/ITreasury.sol\\\";\\n\\n/**\\n * @title IWormholeReceiver\\n * @notice Interface for the Wormhole Relayer to call into our contract.\\n */\\ninterface IWormholeReceiver {\\n    function receiveWormholeMessages(\\n        bytes memory payload,\\n        bytes[] memory additionalVaas,\\n        bytes32 sourceAddress,\\n        uint16 sourceChain,\\n        bytes32 deliveryHash\\n    ) external payable;\\n}\\n\\n/**\\n * @title Receiver\\n * @notice Receives verified messages from Base Sepolia and triggers the Treasury.\\n */\\ncontract Receiver is IWormholeReceiver {\\n\\n    // --- Configuration ---\\n    // The official Wormhole Relayer address on Sepolia\\n    address public immutable wormholeRelayer;\\n    // The Treasury contract we control\\n    ITreasury public immutable treasury;\\n    \\n    // --- Authorization ---\\n    // The approved sender address on the source chain (Voter.sol)\\n    bytes32 public immutable authorizedEmitter;\\n    // The approved source chain ID (Base Sepolia = 10004)\\n    uint16 public constant SOURCE_CHAIN_ID = 10004;\\n\\n    event ProposalReceived(uint256 indexed sourceChain, bytes32 indexed sourceAddress);\\n\\n    constructor(\\n        address _wormholeRelayer,\\n        address _treasury,\\n        bytes32 _authorizedEmitter\\n    ) {\\n        wormholeRelayer = _wormholeRelayer;\\n        treasury = ITreasury(_treasury);\\n        authorizedEmitter = _authorizedEmitter;\\n    }\\n\\n    /**\\n     * @notice The entry point called by the Wormhole Relayer.\\n     * @dev Perform strict security checks before executing the payload.\\n     */\\n    function receiveWormholeMessages(\\n        bytes memory payload,\\n        bytes[] memory, // additionalVaas (unused)\\n        bytes32 sourceAddress,\\n        uint16 sourceChain,\\n        bytes32 // deliveryHash (unused)\\n    ) external payable override {\\n        // Only the official Wormhole Relayer can call this function\\n        require(msg.sender == wormholeRelayer, \\\"Receiver: Only Relayer allowed\\\");\\n\\n        // Ensure the message came from the correct chain (Base Sepolia)\\n        require(sourceChain == SOURCE_CHAIN_ID, \\\"Receiver: Wrong source chain\\\");\\n\\n        // Ensure the message came from our trusted Voter contract\\n        require(sourceAddress == authorizedEmitter, \\\"Receiver: Unauthorized emitter\\\");\\n\\n        // Decode the payload (Must match encoding in Voter.sol)\\n        (\\n            address target,\\n            uint256 value,\\n            bytes memory data\\n        ) = abi.decode(payload, (address, uint256, bytes));\\n\\n        // Execute the action on the Treasury\\n        treasury.executeProposal(target, value, data);\\n\\n        emit ProposalReceived(sourceChain, sourceAddress);\\n    }\\n}\",\"keccak256\":\"0x4ed551a7453cd490dc95c3e1d20cd40d5ba19181938e7d50c06103c63bd71706\",\"license\":\"MIT\"},\"contracts/interfaces/ITreasury.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\n\\n/**\\n * @title ITreasury\\n * @notice Interface for the Treasury contract (deployed on Sepolia/Chain A).\\n * @dev This is used by the Receiver.sol on Sepolia and referenced by the Voter.sol on Base Sepolia.\\n * It defines the function signature the DAO proposals must target.\\n */\\ninterface ITreasury {\\n    /**\\n     * @notice Executes a proposal by making a low-level call. Only callable by the Receiver.sol.\\n     * @param target The address of the contract/EOA to call (e.g., recipient of ETH).\\n     * @param value The amount of ETH (in wei) to send with the call.\\n     * @param data The calldata payload to send with the call.\\n     */\\n    function executeProposal(\\n        address target,\\n        uint256 value,\\n        bytes calldata data\\n    ) external;\\n}\",\"keccak256\":\"0xb94fa4971227b9814d10b1915816ed746cbad1e96c06e292ac171cecfad07949\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60e060405234801561001057600080fd5b5060405161077f38038061077f83398101604081905261002f91610066565b6001600160a01b03928316608052911660a05260c0526100a2565b80516001600160a01b038116811461006157600080fd5b919050565b60008060006060848603121561007b57600080fd5b6100848461004a565b92506100926020850161004a565b9150604084015190509250925092565b60805160a05160c05161069b6100e46000396000818160f00152610228015260008181607601526102b6015260008181610132015261015f015261069b6000f3fe60806040526004361061004a5760003560e01c8063529dca321461004f57806361d027b31461006457806374be2150146100b5578063b717bbbd146100de578063da25b72514610120575b600080fd5b61006261005d36600461044d565b610154565b005b34801561007057600080fd5b506100987f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b0390911681526020015b60405180910390f35b3480156100c157600080fd5b506100cb61271481565b60405161ffff90911681526020016100ac565b3480156100ea57600080fd5b506101127f000000000000000000000000000000000000000000000000000000000000000081565b6040519081526020016100ac565b34801561012c57600080fd5b506100987f000000000000000000000000000000000000000000000000000000000000000081565b336001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016146101d15760405162461bcd60e51b815260206004820152601e60248201527f52656365697665723a204f6e6c792052656c6179657220616c6c6f776564000060448201526064015b60405180910390fd5b61ffff8216612714146102265760405162461bcd60e51b815260206004820152601c60248201527f52656365697665723a2057726f6e6720736f7572636520636861696e0000000060448201526064016101c8565b7f000000000000000000000000000000000000000000000000000000000000000083146102955760405162461bcd60e51b815260206004820152601e60248201527f52656365697665723a20556e617574686f72697a656420656d6974746572000060448201526064016101c8565b6000806000878060200190518101906102ae919061057a565b9250925092507f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663b43950bd8484846040518463ffffffff1660e01b81526004016103049392919061061c565b600060405180830381600087803b15801561031e57600080fd5b505af1158015610332573d6000803e3d6000fd5b505060405188925061ffff881691507f902c61be16481e75fc7b8aae4f2cba721471de4ff713ad10df00162d5355577a90600090a35050505050505050565b634e487b7160e01b600052604160045260246000fd5b604051601f8201601f1916810167ffffffffffffffff811182821017156103b0576103b0610371565b604052919050565b600067ffffffffffffffff8211156103d2576103d2610371565b50601f01601f191660200190565b600082601f8301126103f157600080fd5b81356104046103ff826103b8565b610387565b81815284602083860101111561041957600080fd5b816020850160208301376000918101602001919091529392505050565b803561ffff8116811461044857600080fd5b919050565b600080600080600060a0868803121561046557600080fd5b853567ffffffffffffffff8082111561047d57600080fd5b61048989838a016103e0565b96506020915081880135818111156104a057600080fd5b8801601f81018a136104b157600080fd5b8035828111156104c3576104c3610371565b8060051b6104d2858201610387565b918252828101850191858101908d8411156104ec57600080fd5b86850192505b838310156105285782358681111561050a5760008081fd5b6105188f89838901016103e0565b83525091860191908601906104f2565b809a50505050505050506040860135925061054560608701610436565b949793965091946080013592915050565b60005b83811015610571578181015183820152602001610559565b50506000910152565b60008060006060848603121561058f57600080fd5b83516001600160a01b03811681146105a657600080fd5b60208501516040860151919450925067ffffffffffffffff8111156105ca57600080fd5b8401601f810186136105db57600080fd5b80516105e96103ff826103b8565b8181528760208385010111156105fe57600080fd5b61060f826020830160208601610556565b8093505050509250925092565b60018060a01b0384168152826020820152606060408201526000825180606084015261064f816080850160208701610556565b601f01601f19169190910160800194935050505056fea26469706673582212201c216a8bb2d81de7ef00afc61c42116bf052c4be478476c1c9684ed07bf3f25264736f6c63430008140033",
+  "deployedBytecode": "0x60806040526004361061004a5760003560e01c8063529dca321461004f57806361d027b31461006457806374be2150146100b5578063b717bbbd146100de578063da25b72514610120575b600080fd5b61006261005d36600461044d565b610154565b005b34801561007057600080fd5b506100987f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b0390911681526020015b60405180910390f35b3480156100c157600080fd5b506100cb61271481565b60405161ffff90911681526020016100ac565b3480156100ea57600080fd5b506101127f000000000000000000000000000000000000000000000000000000000000000081565b6040519081526020016100ac565b34801561012c57600080fd5b506100987f000000000000000000000000000000000000000000000000000000000000000081565b336001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016146101d15760405162461bcd60e51b815260206004820152601e60248201527f52656365697665723a204f6e6c792052656c6179657220616c6c6f776564000060448201526064015b60405180910390fd5b61ffff8216612714146102265760405162461bcd60e51b815260206004820152601c60248201527f52656365697665723a2057726f6e6720736f7572636520636861696e0000000060448201526064016101c8565b7f000000000000000000000000000000000000000000000000000000000000000083146102955760405162461bcd60e51b815260206004820152601e60248201527f52656365697665723a20556e617574686f72697a656420656d6974746572000060448201526064016101c8565b6000806000878060200190518101906102ae919061057a565b9250925092507f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031663b43950bd8484846040518463ffffffff1660e01b81526004016103049392919061061c565b600060405180830381600087803b15801561031e57600080fd5b505af1158015610332573d6000803e3d6000fd5b505060405188925061ffff881691507f902c61be16481e75fc7b8aae4f2cba721471de4ff713ad10df00162d5355577a90600090a35050505050505050565b634e487b7160e01b600052604160045260246000fd5b604051601f8201601f1916810167ffffffffffffffff811182821017156103b0576103b0610371565b604052919050565b600067ffffffffffffffff8211156103d2576103d2610371565b50601f01601f191660200190565b600082601f8301126103f157600080fd5b81356104046103ff826103b8565b610387565b81815284602083860101111561041957600080fd5b816020850160208301376000918101602001919091529392505050565b803561ffff8116811461044857600080fd5b919050565b600080600080600060a0868803121561046557600080fd5b853567ffffffffffffffff8082111561047d57600080fd5b61048989838a016103e0565b96506020915081880135818111156104a057600080fd5b8801601f81018a136104b157600080fd5b8035828111156104c3576104c3610371565b8060051b6104d2858201610387565b918252828101850191858101908d8411156104ec57600080fd5b86850192505b838310156105285782358681111561050a5760008081fd5b6105188f89838901016103e0565b83525091860191908601906104f2565b809a50505050505050506040860135925061054560608701610436565b949793965091946080013592915050565b60005b83811015610571578181015183820152602001610559565b50506000910152565b60008060006060848603121561058f57600080fd5b83516001600160a01b03811681146105a657600080fd5b60208501516040860151919450925067ffffffffffffffff8111156105ca57600080fd5b8401601f810186136105db57600080fd5b80516105e96103ff826103b8565b8181528760208385010111156105fe57600080fd5b61060f826020830160208601610556565b8093505050509250925092565b60018060a01b0384168152826020820152606060408201526000825180606084015261064f816080850160208701610556565b601f01601f19169190910160800194935050505056fea26469706673582212201c216a8bb2d81de7ef00afc61c42116bf052c4be478476c1c9684ed07bf3f25264736f6c63430008140033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "receiveWormholeMessages(bytes,bytes[],bytes32,uint16,bytes32)": {
+        "details": "Perform strict security checks before executing the payload."
+      }
+    },
+    "title": "Receiver",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "receiveWormholeMessages(bytes,bytes[],bytes32,uint16,bytes32)": {
+        "notice": "The entry point called by the Wormhole Relayer."
+      }
+    },
+    "notice": "Receives verified messages from Base Sepolia and triggers the Treasury.",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}

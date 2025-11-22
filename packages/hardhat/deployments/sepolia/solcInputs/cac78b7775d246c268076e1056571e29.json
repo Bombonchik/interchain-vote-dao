@@ -1,0 +1,39 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/interfaces/ITreasury.sol": {
+      "content": "//SPDX-License-Identifier: MIT\npragma solidity >=0.8.0 <0.9.0;\n\n\n/**\n * @title ITreasury\n * @notice Interface for the Treasury contract (deployed on Sepolia/Chain A).\n * @dev This is used by the Receiver.sol on Sepolia and referenced by the Voter.sol on Base Sepolia.\n * It defines the function signature the DAO proposals must target.\n */\ninterface ITreasury {\n    /**\n     * @notice Executes a proposal by making a low-level call. Only callable by the Receiver.sol.\n     * @param target The address of the contract/EOA to call (e.g., recipient of ETH).\n     * @param value The amount of ETH (in wei) to send with the call.\n     * @param data The calldata payload to send with the call.\n     */\n    function executeProposal(\n        address target,\n        uint256 value,\n        bytes calldata data\n    ) external;\n}"
+    },
+    "contracts/Receiver.sol": {
+      "content": "//SPDX-License-Identifier: MIT\npragma solidity >=0.8.0 <0.9.0;\n\nimport \"./interfaces/ITreasury.sol\";\n\n/**\n * @title IWormholeReceiver\n * @notice Interface for the Wormhole Relayer to call into our contract.\n */\ninterface IWormholeReceiver {\n    function receiveWormholeMessages(\n        bytes memory payload,\n        bytes[] memory additionalVaas,\n        bytes32 sourceAddress,\n        uint16 sourceChain,\n        bytes32 deliveryHash\n    ) external payable;\n}\n\n/**\n * @title Receiver\n * @notice Receives verified messages from Base Sepolia and triggers the Treasury.\n */\ncontract Receiver is IWormholeReceiver {\n\n    // --- Configuration ---\n    // The official Wormhole Relayer address on Sepolia\n    address public immutable wormholeRelayer;\n    // The Treasury contract we control\n    ITreasury public immutable treasury;\n    \n    // --- Authorization ---\n    // The approved sender address on the source chain (Voter.sol)\n    bytes32 public immutable authorizedEmitter;\n    // The approved source chain ID (Base Sepolia = 10004)\n    uint16 public constant SOURCE_CHAIN_ID = 10004;\n\n    event ProposalReceived(uint256 indexed sourceChain, bytes32 indexed sourceAddress);\n\n    constructor(\n        address _wormholeRelayer,\n        address _treasury,\n        bytes32 _authorizedEmitter\n    ) {\n        wormholeRelayer = _wormholeRelayer;\n        treasury = ITreasury(_treasury);\n        authorizedEmitter = _authorizedEmitter;\n    }\n\n    /**\n     * @notice The entry point called by the Wormhole Relayer.\n     * @dev Perform strict security checks before executing the payload.\n     */\n    function receiveWormholeMessages(\n        bytes memory payload,\n        bytes[] memory, // additionalVaas (unused)\n        bytes32 sourceAddress,\n        uint16 sourceChain,\n        bytes32 // deliveryHash (unused)\n    ) external payable override {\n        // Only the official Wormhole Relayer can call this function\n        require(msg.sender == wormholeRelayer, \"Receiver: Only Relayer allowed\");\n\n        // Ensure the message came from the correct chain (Base Sepolia)\n        require(sourceChain == SOURCE_CHAIN_ID, \"Receiver: Wrong source chain\");\n\n        // Ensure the message came from our trusted Voter contract\n        require(sourceAddress == authorizedEmitter, \"Receiver: Unauthorized emitter\");\n\n        // Decode the payload (Must match encoding in Voter.sol)\n        (\n            address target,\n            uint256 value,\n            bytes memory data\n        ) = abi.decode(payload, (address, uint256, bytes));\n\n        // Execute the action on the Treasury\n        treasury.executeProposal(target, value, data);\n\n        emit ProposalReceived(sourceChain, sourceAddress);\n    }\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "paris",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

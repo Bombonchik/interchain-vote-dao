@@ -15,14 +15,14 @@ const deployReceiver: DeployFunction = async function (hre: HardhatRuntimeEnviro
   const treasury = await hre.ethers.getContract<Contract>("Treasury", deployer);
   const treasuryAddress = await treasury.getAddress();
 
-  const VOTER_ADDRESS_BASE_SEPOLIA = "0x82A1c924FBbC6c09b5431d99931b423AD1A43384";
+  const VOTER_ADDRESS_BASE_SEPOLIA = "0xA2C14540EE99795774FAb3D7Ee39AfdEAb49ae22";
 
   // Convert address to bytes32 (Wormhole format)
   // This pads the 20-byte address with zeros to make it 32 bytes
   const authorizedEmitter = ethers.zeroPadValue(VOTER_ADDRESS_BASE_SEPOLIA, 32);
 
   // Wormhole Relayer on Sepolia
-  const WORMHOLE_RELAYER_SEPOLIA = "0x7b1bd7a6b4e61c2a123f6cb2dc53182f64f543fd";
+  const WORMHOLE_RELAYER_SEPOLIA = "0x7B1bD7a6b4E61c2a123AC6BC2cbfC614437D0470";
 
   await deploy("Receiver", {
     from: deployer,

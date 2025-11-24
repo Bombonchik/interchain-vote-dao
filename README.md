@@ -1,80 +1,121 @@
-# 🏗 Scaffold-ETH 2
+# Interchain Vote DAO
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+This project is a **Decentralized Multi-Chain Governance System** built using **Scaffold-ETH-2** and **Wormhole**.
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+It solves the problem of high gas costs in DAO governance by separating the **Voting Layer** from the **Execution Layer**. Members vote cheaply on an L2 (Base Sepolia), and the results are trustlessly relayed to execute transactions on the main treasury chain (Sepolia).
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+## 🌐 Concept
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+1. **Treasury (Chain A - Sepolia):** Holds the high-value assets (ETH, USDC, ...). It is controlled exclusively by the governance system.
+    
+2. **Voting (Chain B - Base Sepolia):** Users hold `DAOToken` and vote on proposals here to minimize gas fees.
+    
+3. **Bridge (Wormhole):** Once a proposal passes on Chain B, a verified message (VAA) is sent to Chain A to trigger the execution.
+    
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+## 📂 Smart Contracts
 
-## Requirements
+![alt text](image.png)
 
-Before you begin, you need to install the following tools:
+### Chain A: Sepolia (Treasury Layer)
 
-- [Node (>= v20.18.3)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+- **`Treasury.sol`**: Holds the DAO's funds. It contains an `executeProposal` function that allows arbitrary transactions (transfers, contract calls) but can only be called by the `Receiver` contract.
+    
+- **`Receiver.sol`**: The entry point for the Wormhole Relayer. It verifies that the message originated from the official `Voter` contract on Base Sepolia before triggering the Treasury.
+    
 
-## Quickstart
+### Chain B: Base Sepolia (Voting Layer)
 
-To get started with Scaffold-ETH 2, follow the steps below:
+- **`DAOToken.sol`**: An ERC20 token implementing `ERC20Votes` for snapshot-based voting power.
+    
+- **`Voter.sol`**: Manages the proposal lifecycle. It takes a snapshot of voting power, tallies votes, and if passed, encodes the execution data to send across the Wormhole Relayer.
+    
 
-1. Install dependencies if it was skipped in CLI:
+## 🚀 Getting Started
 
-```
-cd my-dapp-example
-yarn install
-```
+### Prerequisites
 
-2. Run a local network in the first terminal:
+- [Node.js](https://nodejs.org/) (>= v18.17)
+    
+- Yarn
+    
+- Git
+    
 
-```
-yarn chain
-```
+### Installation
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `packages/hardhat/hardhat.config.ts`.
+1. Clone the repository:
+    
+    Bash
+    
+    ```
+    git clone <your-repo-url>
+    cd <your-repo-name>
+    ```
+    
+2. Install dependencies:
+    
+    Bash
+    
+    ```
+    yarn install
+    ```
+    
 
-3. On a second terminal, deploy the test contract:
+### Configuration
 
-```
-yarn deploy
-```
+This project requires deployment to two different networks. Ensure your `.env` file contains a deployer private key with funds on both **Base Sepolia** and **Sepolia**.
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
+## 📖 Usage Guide
 
-4. On a third terminal, start your NextJS app:
+### 1. Minting & Delegation (Base Sepolia)
 
-```
-yarn start
-```
+Users must hold the `DAOToken` to participate.
+    
+- **Important:** `ERC20Votes` requires delegation. Ensure you delegate votes to yourself (or another address) to activate your voting power.
+    
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+### 2. Creating a Proposal (Base Sepolia)
 
-Run smart contract test with `yarn hardhat:test`
+Navigate to the "Governance" tab. You can propose:
 
-- Edit your smart contracts in `packages/hardhat/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/hardhat/deploy`
+- **ETH Transfer:** Send Native ETH from the Treasury on Sepolia.
+    
+- **ERC20 Transfer:** Send USDC (or other tokens) from the Treasury.
+    
+- **Custom Call:** Execute any arbitrary smart contract function on Sepolia.
+    
 
+Note: The system takes a snapshot of your voting power at the exact block the proposal is created.
 
-## Documentation
+### 3. Voting (Base Sepolia)
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
+Users vote "For" or "Against".
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
+- This transaction is cheap as it occurs on Base Sepolia.
+    
+- Voting stays open for a defined period (default 15 blocks for demo purposes).
+    
 
-## Contributing to Scaffold-ETH 2
+### 4. Execution & Bridging (The "Wait")
 
-We welcome contributions to Scaffold-ETH 2!
+Once the voting period ends and the proposal passes:
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+1. Click **Execute** on the frontend.
+    
+2. This calls `finalizeAndSend` on the `Voter` contract.
+    
+3. The contract sends the instruction to the Wormhole Relayer.
+    
+
+> **⚠️ WORMHOLE FINALITY WARNING:** To ensure security, Wormhole waits for "Finality" on the source chain before emitting the message to the destination chain. On Base Sepolia/Sepolia, **this process typically takes 18 to 20 minutes.**
+> 
+> Please do not panic if the Treasury on Sepolia does not update immediately. You can monitor the Wormhole Scan explorer using the transaction hash generated by the `finalizeAndSend` action.
+
+## 🛠 Tech Stack
+
+- **Scaffold-ETH-2:** NextJS, RainbowKit, Wagmi, Viem.
+    
+- **Solidity:** Smart contracts for governance and treasury logic.
+    
+- **Wormhole SDK:** For cross-chain message passing.
